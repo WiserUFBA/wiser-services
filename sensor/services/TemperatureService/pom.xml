@@ -32,6 +32,13 @@
     <name>TemperatureService</name>
     <description>CXF service using JAX-RS for map temperature device</description>
 
+    <repositories>
+        <repository>
+            <id>wiser-releases</id>
+            <url>https://github.com/WiserUFBA/wiser-mvn-repo/raw/master/releases</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.servicemix.specs</groupId>
@@ -46,12 +53,10 @@
             <artifactId>org.apache.servicemix.bundles.commons-httpclient</artifactId>
         </dependency>
         <dependency>
-		    <groupId>sample</groupId>
-		    <artifactId>com.sample</artifactId>
-		    <version>1.0</version>
-		    <scope>system</scope>
-		    <systemPath>${project.basedir}/lib/MQTTDriver.jar</systemPath>
-		</dependency>
+            <groupId>br.ufba.dcc.wiser</groupId>
+            <artifactId>drivermqtt</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <build>
