@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1428702976474
+Build-Jdk: 1.7.0_75
+Built-By: tequila
+Bundle-Description: CXF Example using JAX-RS
+Bundle-ManifestVersion: 2
+Bundle-Name: PresenceService
+Bundle-SymbolicName: PresenceService
+Bundle-Version: 5.4.1.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: br.dcc.ufba.wiser.smartufba.sensor.PresenceService;versi
+ on="5.4.1"
+Import-Package: javax.xml.bind.annotation;version="[2.2,3)",javax.ws.rs;
+ version="[2.0,3)",javax.ws.rs.core;version="[2.0,3)",javax.xml.bind;ver
+ sion="[2.2,3)",javax.wsdl,org.springframework.beans.factory.config
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.5))"
+Tool: Bnd-2.3.0.201405100607
