@@ -23,7 +23,7 @@ public class TemperatureService {
         Temperature t = new Temperature();
         t.setUnit("Celsius");
         
-        DriverMQTT temp = new DriverMQTT("localhost", 8080, "device", "boteco@wiser", "temp");
+        DriverMQTT temp = new DriverMQTT("temp-lamp", "device", "boteco@wiser");
         String degree = temp.getInfo("temp");
         
         t.setDegree(new Integer(degree));

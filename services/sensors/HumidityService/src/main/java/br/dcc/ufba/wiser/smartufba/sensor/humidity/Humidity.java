@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "Humidity")
 public class Humidity {
-	private String percent; 
+    private String percent; 
 
     public String getPercent() {
         return percent;

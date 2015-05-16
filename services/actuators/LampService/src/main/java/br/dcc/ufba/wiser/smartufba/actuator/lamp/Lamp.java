@@ -7,8 +7,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "Lamp")
 public class Lamp {
-	private boolean status; 
+    private boolean status; 
 
+    public Lamp(){
+        status = false;
+    }
+    
     public boolean getStatus() {
         return status;
     }

@@ -5,9 +5,7 @@ package br.dcc.ufba.wiser.smartufba.sensor.humidity;
 
 import java.io.IOException;
 
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
@@ -26,8 +24,8 @@ public class HumidityService {
     public Response getHumidity() throws Exception {
         Humidity h = new Humidity();
         
-        DriverMQTT humidity = new DriverMQTT("104.236.60.240", 8080, "device", "boteco@wiser", "humidity");
-        String percent = humidity.getInfo("humidity");
+        DriverMQTT humidity = new DriverMQTT("temp-lamp", "device", "boteco@wiser");
+        String percent = humidity.getInfo("ar");
         
         h.setPercent(percent);
         
