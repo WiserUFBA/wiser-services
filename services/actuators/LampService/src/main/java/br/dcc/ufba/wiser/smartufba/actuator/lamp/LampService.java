@@ -10,18 +10,31 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
+
 import br.ufba.dcc.wiser.smartufba.tatu.drivers.DriverMQTT;
 
 @Path("/devices/actuator/lamp")
 public class LampService {
-    private static final Lamp l = new Lamp(); 
     
     public LampService() {
     }
 
     @GET
     @Produces("application/json")
-    public Response getStatusLamp() throws Exception {        
+    public Response getStatusLamp() throws Exception {
+    	
+    	Lamp l = new Lamp();
+        
+        DriverMQTT lamp = new DriverMQTT("temp-lamp", "device", "boteco@wiser");
+        String status = lamp.getInfo("lamp");
+        
+        
+        if(status.contentEquals("ON")){ 
+        	l.setStatus(true);
+        }else{
+        	l.setStatus(false);
+        }
+    	
         ResponseBuilder rb = Response.ok(l)
             .header("Access-Control-Allow-Origin", "*")
             .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
@@ -29,14 +42,16 @@ public class LampService {
             .allow("OPTIONS");
         return rb.build();
     }
-    
+ 
     @POST
     @Produces("application/json")
-    public Response setStatusLamp(@FormParam("status") boolean status) throws Exception {     
+    public Response setStatusLamp(@FormParam("status") boolean status) throws Exception {
+    	Lamp l = new Lamp();    	
+    	l.setStatus(status);
+    	
         DriverMQTT lamp = new DriverMQTT("temp-lamp", "device", "boteco@wiser"); 
         
-        lamp.setInfo("lamp", l.getStatus() ? 0 : 1);
-        l.setStatus(!l.getStatus());
+        lamp.setInfo("lamp", l.getStatus() ? 1 : 0);      
         
         ResponseBuilder rb = Response.ok(l)
             .header("Access-Control-Allow-Origin", "*")
