@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "AirConditioner")
 public class AirConditioner{
     private boolean status;
-    private int value;
+    private String value;
 
     public AirConditioner(){}
     
@@ -20,11 +20,11 @@ public class AirConditioner{
         this.status = status;
     }
     
-    public int getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(String value) {
         this.value = value;
     }
 
