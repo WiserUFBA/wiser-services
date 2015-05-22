@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response;
  
 @Path("/devices/actuator/camera")
 public class CameraService {
+	
     private String cameraIp = "192.168.0.199:7777";
     private HashMap<String, Integer> mapaStringCodigos = new HashMap<String, Integer>() {
             private static final long serialVersionUID = 1L;
