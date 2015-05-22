@@ -21,12 +21,12 @@ public class AirConditionerService {
 
     @GET
     @Produces("application/json")
-    public Response getStatusAirConditioner() throws Exception {
+    public Response getStateAirConditioner() throws Exception {
     	
     	AirConditioner a = new AirConditioner();
         
-        DriverMQTT air = new DriverMQTT("nome", "device", "boteco@wiser");
-        String status = air.getInfo("state");
+        DriverMQTT air = new DriverMQTT("air-conditioner", "device", "boteco@wiser");
+        String status = air.getInfo("status");
         
         
         if(status.contentEquals("on")){ 
@@ -34,7 +34,30 @@ public class AirConditionerService {
         }else{
         	a.setStatus(false);
         }
+        String value = air.getInfo("value");        
+        a.setValue(value);
+        
+        ResponseBuilder rb = Response.ok(a)
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+            .header("Access-Control-Allow-Headers", "Content-Type")
+            .allow("OPTIONS");
+        return rb.build();
+    } 
+    
+ 
+    @POST
+    @Produces("application/json")
+    public Response setValueAirConditioner(@FormParam("value") String value) throws Exception {
+    	AirConditioner a = new AirConditioner();    	
+    	a.setValue(value);
     	
+        DriverMQTT air = new DriverMQTT("air-conditioner", "device", "boteco@wiser"); 
+        
+        air.setInfo("value", Integer.parseInt(value));
+        
+        a.setStatus(Integer.parseInt(value) > 0 ? true : false);
+        
         ResponseBuilder rb = Response.ok(a)
             .header("Access-Control-Allow-Origin", "*")
             .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
@@ -42,22 +65,8 @@ public class AirConditionerService {
             .allow("OPTIONS");
         return rb.build();
     }
- 
-    @POST
-    @Produces("application/json")
-    public Response setStatusAirConditioner(@FormParam("status") boolean status) throws Exception {
-    	AirConditioner a = new AirConditioner();    	
-    	a.setStatus(status);
-    	
-        DriverMQTT air = new DriverMQTT("temp-air", "device", "boteco@wiser"); 
-        
-        air.setInfo("air", a.getStatus() ? 1 : 0);      
-        
-        ResponseBuilder rb = Response.ok(a)
-            .header("Access-Control-Allow-Origin", "*")
-            .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-            .header("Access-Control-Allow-Headers", "Content-Type")
-            .allow("OPTIONS");
-        return rb.build();
+    
+    public void turnOffAirConditioner() throws Exception{
+    	setValueAirConditioner("0");
     }
 }
