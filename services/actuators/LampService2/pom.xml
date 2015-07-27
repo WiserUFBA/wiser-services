@@ -4,9 +4,9 @@
 
     <groupId>br.dcc.ufba.wiser.smartufba</groupId>
     <version>1.2</version>
-    <artifactId>LampService</artifactId>
+    <artifactId>LampServiceSide</artifactId>
     <packaging>bundle</packaging>
-    <name>LightService</name>
+    <name>LightServiceSide</name>
     <description>CXF service using JAX-RS for map light device</description>
     
     <repositories>
