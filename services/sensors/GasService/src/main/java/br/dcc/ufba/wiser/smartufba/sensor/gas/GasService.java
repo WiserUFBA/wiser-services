@@ -17,14 +17,13 @@ public class GasService {
     public GasService() {
     }
 
-
     @GET
     @Produces("application/json")
     public Response getGas() throws Exception {
         Gas g = new Gas();
         
         DriverMQTT gas = new DriverMQTT("rele-pres", "device", "boteco@wiser");
-        String rate = gas.getValue("gas");
+        String rate = "" + gas.getValue("gas");
         
         g.setRate(new Integer(rate));
         
