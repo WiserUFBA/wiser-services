@@ -1,7 +1,7 @@
 /*
  * Created by Wiser Research Group UFBA
  */
-package br.dcc.ufba.wiser.smartufba.actuator.air;
+package br.dcc.ufba.wiser.smartufba.services.actuator;
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -22,12 +22,10 @@ public class AirConditionerService {
     @GET
     @Produces("application/json")
     public Response getStateAirConditioner() throws Exception {
-    	
     	AirConditioner a = new AirConditioner();
         
         DriverMQTT air = new DriverMQTT("air-conditioner", "device", "boteco@wiser");
         String status = air.getInfo("status");
-        
         
         if(status.contentEquals("on")){ 
         	a.setStatus(true);
@@ -43,8 +41,7 @@ public class AirConditionerService {
             .header("Access-Control-Allow-Headers", "Content-Type")
             .allow("OPTIONS");
         return rb.build();
-    } 
-    
+    }
  
     @POST
     @Produces("application/json")
@@ -54,9 +51,9 @@ public class AirConditionerService {
     	
         DriverMQTT air = new DriverMQTT("air-conditioner", "device", "boteco@wiser"); 
         
-        air.setInfo("value", Integer.parseInt(value));
+        air.setInfo("value", value);
         
-        a.setStatus(Integer.parseInt(value) > 0 ? true : false);
+        a.setStatus((Integer.parseInt(value) > 0));
         
         ResponseBuilder rb = Response.ok(a)
             .header("Access-Control-Allow-Origin", "*")

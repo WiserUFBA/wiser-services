@@ -1,7 +1,7 @@
 /*
  * Created by Wiser Research Group UFBA
  */
-package br.dcc.ufba.wiser.smartufba.sensor.gas;
+package br.dcc.ufba.wiser.smartufba.services.sensor;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -9,7 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
-import br.ufba.dcc.wiser.smartufba.tatu.drivers.DriverMQTT;
+import br.ufba.dcc.wiser.smartufba.tatu.drivers.*;
 
 @Path("/devices/sensor/gas")
 public class GasService {

@@ -1,15 +1,15 @@
 /*
  * Created by Wiser Research Group UFBA
  */
-package br.dcc.ufba.wiser.smartufba.actuator.lampside;
+package br.dcc.ufba.wiser.smartufba.services.actuator;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "Lamp")
-public class LampSide {
+public class Lamp {
     private boolean status; 
 
-    public LampSide(){
+    public Lamp(){
         status = false;
     }
     

@@ -1,7 +1,7 @@
 /*
  * Created by Wiser Research Group UFBA
  */
-package br.dcc.ufba.wiser.smartufba.actuator.lamp;
+package br.dcc.ufba.wiser.smartufba.services.actuator;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

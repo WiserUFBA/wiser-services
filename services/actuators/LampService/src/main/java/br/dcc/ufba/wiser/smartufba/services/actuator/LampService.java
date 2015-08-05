@@ -1,7 +1,7 @@
 /*
  * Created by Wiser Research Group UFBA
  */
-package br.dcc.ufba.wiser.smartufba.actuator.lampside;
+package br.dcc.ufba.wiser.smartufba.services.actuator;
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -14,18 +14,18 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import br.ufba.dcc.wiser.smartufba.tatu.drivers.DriverMQTT;
 
 @Path("/devices/actuator/lamp")
-public class LampServiceSide {
+public class LampService {
     
-    public LampServiceSide() {
+    public LampService() {
     }
 
     @GET
     @Produces("application/json")
     public Response getStatusLamp() throws Exception {
     	
-    	LampSide l = new LampSide();
+    	Lamp l = new Lamp();
         
-        DriverMQTT lamp = new DriverMQTT("rele-pres", "device", "boteco@wiser");
+        DriverMQTT lamp = new DriverMQTT("temp-lamp", "device", "boteco@wiser");
         String status = lamp.getInfo("lamp");
         
         
@@ -46,12 +46,12 @@ public class LampServiceSide {
     @POST
     @Produces("application/json")
     public Response setStatusLamp(@FormParam("status") boolean status) throws Exception {
-    	LampSide l = new LampSide();    	
+    	Lamp l = new Lamp();    	
     	l.setStatus(status);
     	
-        DriverMQTT lamp = new DriverMQTT("rele-pres", "device", "boteco@wiser"); 
+        DriverMQTT lamp = new DriverMQTT("temp-lamp", "device", "boteco@wiser"); 
         
-        lamp.setInfo("lamp", l.getStatus() ? 1 : 0);      
+        lamp.setInfo("lamp", "" +(l.getStatus() ? 1 : 0));      
         
         ResponseBuilder rb = Response.ok(l)
             .header("Access-Control-Allow-Origin", "*")

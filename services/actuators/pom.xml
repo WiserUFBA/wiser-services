@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created by Wiser Research Group UFBA -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-
-    <parent>
-        <groupId>br.dcc.ufba.wiser.smartufba</groupId>
-        <artifactId>sensor</artifactId>
-        <version>1.0.1-SNAPSHOT</version>
-    </parent>
-
+    
+    <name>SmartUFBA Actuators Services</name>
+    <artifactId>services-actuators</artifactId>
     <groupId>br.dcc.ufba.wiser.smartufba</groupId>
-    <artifactId>services</artifactId>
     <packaging>pom</packaging>
-    <!-- Change this name -->
-    <name>Apache ServiceMix :: Examples :: CXF</name>
+    <version>1.2</version>
 
     <modules>
-        <!-- Some errors. Fix this file -->
-        <module>PresenceService</module>
+        <module> LampService2 </module>
+        <module> AirConditionerService </module>
+        <module> LampService </module>
+        <module> CameraService </module>
     </modules>
 
 </project>

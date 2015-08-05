@@ -1,7 +1,7 @@
 /*
  * Created by Wiser Research Group UFBA
  */
-package br.dcc.ufba.wiser.smartufba.sensor.move;
+package br.dcc.ufba.wiser.smartufba.services.sensor;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -13,7 +13,7 @@ public class Move {
         return movements;
     }
 
-    public void setMove(String m) {
+    public void setMove(int m) {
         this.movements = m;
     }
 }

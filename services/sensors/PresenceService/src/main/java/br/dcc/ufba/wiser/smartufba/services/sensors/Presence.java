@@ -1,7 +1,7 @@
 /*
  * Created by Wiser Research Group UFBA
  */
-package br.dcc.ufba.wiser.smartufba.sensor.presence;
+package br.dcc.ufba.wiser.smartufba.services.sensors;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
