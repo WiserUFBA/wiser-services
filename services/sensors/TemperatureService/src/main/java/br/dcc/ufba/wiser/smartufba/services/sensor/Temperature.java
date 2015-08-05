@@ -1,7 +1,7 @@
 /*
  * Created by Wiser Research Group UFBA
  */
-package br.dcc.ufba.wiser.smartufba.sensor.temperature;
+package br.dcc.ufba.wiser.smartufba.services.sensor;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

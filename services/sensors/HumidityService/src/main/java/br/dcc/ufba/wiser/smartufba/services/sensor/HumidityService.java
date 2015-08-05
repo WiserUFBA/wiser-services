@@ -1,7 +1,7 @@
 /*
  * Created by Wiser Research Group UFBA
  */
-package br.dcc.ufba.wiser.smartufba.sensor.humidity;
+package br.dcc.ufba.wiser.smartufba.services.sensor;
 
 import java.io.IOException;
 
