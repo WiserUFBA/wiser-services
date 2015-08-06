@@ -22,44 +22,69 @@ public class AirConditionerService {
     @GET
     @Produces("application/json")
     public Response getStateAirConditioner() throws Exception {
-    	AirConditioner a = new AirConditioner();
+    	ResponseBuilder rb;
+        XmlErrorClass x = new XmlErrorClass();
+        AirConditioner a = new AirConditioner();
         
-        DriverMQTT air = new DriverMQTT("air-conditioner", "device", "boteco@wiser");
-        String status = air.getInfo("status");
-        
-        if(status.contentEquals("on")){ 
-        	a.setStatus(true);
-        }else{
-        	a.setStatus(false);
+        try{
+            DriverMQTT air = new DriverMQTT("air-conditioner", "device", "boteco@wiser");
+            String status = air.getInfo("status");
+
+            if(status.contentEquals("on")){ 
+                    a.setStatus(true);
+            }else{
+                    a.setStatus(false);
+            }
+            String value = air.getInfo("value");        
+            a.setValue(value);
+
+            rb = Response.ok(a)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .header("Access-Control-Allow-Headers", "Content-Type")
+                .allow("OPTIONS");
         }
-        String value = air.getInfo("value");        
-        a.setValue(value);
+        catch(Exception e){
+            x.setStatus(true);
+            rb = Response.ok(x)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .header("Access-Control-Allow-Headers", "Content-Type")
+                .allow("OPTIONS");
+        }
         
-        ResponseBuilder rb = Response.ok(a)
-            .header("Access-Control-Allow-Origin", "*")
-            .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-            .header("Access-Control-Allow-Headers", "Content-Type")
-            .allow("OPTIONS");
         return rb.build();
     }
  
     @POST
     @Produces("application/json")
     public Response setValueAirConditioner(@FormParam("value") String value) throws Exception {
-    	AirConditioner a = new AirConditioner();    	
+    	ResponseBuilder rb;
+        XmlErrorClass x = new XmlErrorClass();
+        AirConditioner a = new AirConditioner();    	
     	a.setValue(value);
     	
-        DriverMQTT air = new DriverMQTT("air-conditioner", "device", "boteco@wiser"); 
+        try{
+            DriverMQTT air = new DriverMQTT("air-conditioner", "device", "boteco@wiser"); 
+
+            air.setInfo("value", value);
+            a.setStatus((Integer.parseInt(value) > 0));
+
+            rb = Response.ok(a)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .header("Access-Control-Allow-Headers", "Content-Type")
+                .allow("OPTIONS");
+        }
+        catch(Exception e){
+            x.setStatus(true);
+            rb = Response.ok(x)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .header("Access-Control-Allow-Headers", "Content-Type")
+                .allow("OPTIONS");
+        }
         
-        air.setInfo("value", value);
-        
-        a.setStatus((Integer.parseInt(value) > 0));
-        
-        ResponseBuilder rb = Response.ok(a)
-            .header("Access-Control-Allow-Origin", "*")
-            .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-            .header("Access-Control-Allow-Headers", "Content-Type")
-            .allow("OPTIONS");
         return rb.build();
     }
     

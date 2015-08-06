@@ -3,8 +3,6 @@
  */
 package br.dcc.ufba.wiser.smartufba.services.sensor;
 
-import java.io.IOException;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -21,19 +19,31 @@ public class HumidityService {
 
     @GET
     @Produces("application/json")
-    public Response getHumidity() throws Exception {
+    public Response getHumidity(){
+        ResponseBuilder rb;
+        XmlErrorClass x = new XmlErrorClass();
         Humidity h = new Humidity();
         
-        DriverMQTT humidity = new DriverMQTT("temp-lamp", "device", "boteco@wiser");
-        String percent = humidity.getInfo("ar");
-        
-        h.setPercent(percent);
-        
-        ResponseBuilder rb = Response.ok(h)
-            .header("Access-Control-Allow-Origin", "*")
-            .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-            .header("Access-Control-Allow-Headers", "Content-Type")
-            .allow("OPTIONS");
+        try{
+            DriverMQTT humidity = new DriverMQTT("temp-lamp", "device", "boteco@wiser");
+            String percent = humidity.getInfo("ar");
+
+            h.setPercent(percent);
+
+            rb = Response.ok(h)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .header("Access-Control-Allow-Headers", "Content-Type")
+                .allow("OPTIONS");
+        } catch (Exception e) {
+            x.setStatus(true);
+            rb = Response.ok(x)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .header("Access-Control-Allow-Headers", "Content-Type")
+                    .allow("OPTIONS");
+        }
+
         return rb.build();
         
     }

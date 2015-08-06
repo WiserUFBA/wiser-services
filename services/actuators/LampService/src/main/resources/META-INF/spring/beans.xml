@@ -17,7 +17,7 @@ http://www.springframework.org/schema/osgi http://www.springframework.org/schema
         </jaxrs:serviceBeans>
     </jaxrs:server>
     
-    <!-- Change the ID according to the first ID adding the suffix 'Svc' -->
+    <!-- Change the ID according to the bean property changed above, you need to use the same value -->
     <!-- You need to select the class of the service too -->
     <bean id="ActuatorLampSvc" class="br.dcc.ufba.wiser.smartufba.services.actuator.LampService"/>
 

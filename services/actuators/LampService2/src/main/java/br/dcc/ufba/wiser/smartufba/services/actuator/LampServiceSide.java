@@ -15,49 +15,68 @@ import br.ufba.dcc.wiser.smartufba.tatu.drivers.DriverMQTT;
 
 @Path("/devices/actuator/lamp")
 public class LampServiceSide {
-    
+
     public LampServiceSide() {
     }
 
     @GET
     @Produces("application/json")
-    public Response getStatusLamp() throws Exception {
-    	
-    	LampSide l = new LampSide();
-        
-        DriverMQTT lamp = new DriverMQTT("rele-pres", "device", "boteco@wiser");
-        String status = lamp.getInfo("lamp");
-        
-        
-        if(status.contentEquals("ON")){ 
-        	l.setStatus(true);
-        }else{
-        	l.setStatus(false);
+    public Response getStatusLamp() {
+        ResponseBuilder rb;
+        XmlErrorClass x = new XmlErrorClass();
+        LampSide l = new LampSide();
+
+        try {
+            DriverMQTT lamp = new DriverMQTT("rele-pres", "device", "boteco@wiser");
+            String status = lamp.getInfo("lamp");
+
+            if (status.contentEquals("ON")) {
+                l.setStatus(true);
+            } else {
+                l.setStatus(false);
+            }
+            rb = Response.ok(l)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .header("Access-Control-Allow-Headers", "Content-Type")
+                    .allow("OPTIONS");
+        } catch (Exception e) {
+            x.setStatus(true);
+            rb = Response.ok(x)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .header("Access-Control-Allow-Headers", "Content-Type")
+                    .allow("OPTIONS");
         }
-    	
-        ResponseBuilder rb = Response.ok(l)
-            .header("Access-Control-Allow-Origin", "*")
-            .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-            .header("Access-Control-Allow-Headers", "Content-Type")
-            .allow("OPTIONS");
+
         return rb.build();
     }
- 
+
     @POST
     @Produces("application/json")
-    public Response setStatusLamp(@FormParam("status") boolean status) throws Exception {
-    	LampSide l = new LampSide();    	
-    	l.setStatus(status);
-    	
-        DriverMQTT lamp = new DriverMQTT("rele-pres", "device", "boteco@wiser"); 
-        
-        lamp.setInfo("lamp", ""+(l.getStatus() ? 1 : 0));      
-        
-        ResponseBuilder rb = Response.ok(l)
-            .header("Access-Control-Allow-Origin", "*")
-            .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-            .header("Access-Control-Allow-Headers", "Content-Type")
-            .allow("OPTIONS");
+    public Response setStatusLamp(@FormParam("status") boolean status) {
+        ResponseBuilder rb;
+        XmlErrorClass x = new XmlErrorClass();
+        LampSide l = new LampSide();
+        l.setStatus(status);
+
+        try {
+            DriverMQTT lamp = new DriverMQTT("rele-pres", "device", "boteco@wiser");
+            lamp.setInfo("lamp", "" + (l.getStatus() ? 1 : 0));
+            rb = Response.ok(l)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .header("Access-Control-Allow-Headers", "Content-Type")
+                .allow("OPTIONS");
+        } catch (Exception e) {
+            x.setStatus(true);
+            rb = Response.ok(x)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .header("Access-Control-Allow-Headers", "Content-Type")
+                    .allow("OPTIONS");
+        }
+
         return rb.build();
     }
 }

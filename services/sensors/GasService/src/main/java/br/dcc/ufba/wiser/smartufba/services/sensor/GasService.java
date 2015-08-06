@@ -20,18 +20,30 @@ public class GasService {
     @GET
     @Produces("application/json")
     public Response getGas() throws Exception {
+        ResponseBuilder rb;
+        XmlErrorClass x = new XmlErrorClass();
         Gas g = new Gas();
         
-        DriverMQTT gas = new DriverMQTT("rele-pres", "device", "boteco@wiser");
-        String rate = "" + gas.getValue("gas");
+        try{
+            DriverMQTT gas = new DriverMQTT("rele-pres", "device", "boteco@wiser");
+            String rate = "" + gas.getValue("gas");
+
+            g.setRate(new Integer(rate));
+
+            rb = Response.ok(g)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .header("Access-Control-Allow-Headers", "Content-Type")
+                .allow("OPTIONS");
+        } catch (Exception e) {
+            x.setStatus(true);
+            rb = Response.ok(x)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .header("Access-Control-Allow-Headers", "Content-Type")
+                    .allow("OPTIONS");
+        }
         
-        g.setRate(new Integer(rate));
-        
-        ResponseBuilder rb = Response.ok(g)
-            .header("Access-Control-Allow-Origin", "*")
-            .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-            .header("Access-Control-Allow-Headers", "Content-Type")
-            .allow("OPTIONS");
         return rb.build();
     }
 }

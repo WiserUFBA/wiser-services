@@ -20,19 +20,31 @@ public class TemperatureService {
     @GET
     @Produces("application/json")
     public Response getTemperature() throws Exception {
+        ResponseBuilder rb;
+        XmlErrorClass x = new XmlErrorClass();
         Temperature t = new Temperature();
         t.setUnit("Celsius");
         
-        DriverMQTT temp = new DriverMQTT("temp-lamp", "device", "boteco@wiser");
-        String degree = temp.getInfo("temp");
+        try{
+            DriverMQTT temp = new DriverMQTT("temp-lamp", "device", "boteco@wiser");
+            String degree = temp.getInfo("temp");
+
+            t.setDegree(new Integer(degree));
+
+            rb = Response.ok(t)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .header("Access-Control-Allow-Headers", "Content-Type")
+                .allow("OPTIONS");
+        } catch (Exception e) {
+            x.setStatus(true);
+            rb = Response.ok(x)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .header("Access-Control-Allow-Headers", "Content-Type")
+                    .allow("OPTIONS");
+        }
         
-        t.setDegree(new Integer(degree));
-        
-        ResponseBuilder rb = Response.ok(t)
-            .header("Access-Control-Allow-Origin", "*")
-            .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-            .header("Access-Control-Allow-Headers", "Content-Type")
-            .allow("OPTIONS");
         return rb.build();
     }
 }

@@ -19,20 +19,30 @@ public class MoveService {
 
     @GET
     @Produces("application/json")
-    public Response getMove() throws Exception {
+    public Response getMove() {
+        ResponseBuilder rb;
+        XmlErrorClass x = new XmlErrorClass();
         Move m = new Move();
 
-        DriverMQTT movement = new DriverMQTT("rele-pres", "device", "boteco@wiser");
-        int move = movement.getValue("pres1");
-        
-        m.setMove(move);
+        try{
+            DriverMQTT movement = new DriverMQTT("rele-pres", "device", "boteco@wiser");
+            int move = movement.getValue("pres1");
+            m.setMove(move);
 
-        ResponseBuilder rb = Response.ok(m)
-            .header("Access-Control-Allow-Origin", "*")
-            .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-            .header("Access-Control-Allow-Headers", "Content-Type")
-            .allow("OPTIONS");
-        return rb.build();
+            rb = Response.ok(m)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .header("Access-Control-Allow-Headers", "Content-Type")
+                .allow("OPTIONS");
+        } catch (Exception e) {
+            x.setStatus(true);
+            rb = Response.ok(x)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .header("Access-Control-Allow-Headers", "Content-Type")
+                    .allow("OPTIONS");
+        }
         
+        return rb.build();
     }
 }
