@@ -8,7 +8,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
-
 import br.ufba.dcc.wiser.smartufba.tatu.drivers.DriverMQTT;
 
 @Path("/devices/sensor/temperature")
@@ -31,20 +30,16 @@ public class TemperatureService {
 
             t.setDegree(new Integer(degree));
 
-            rb = Response.ok(t)
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-                .header("Access-Control-Allow-Headers", "Content-Type")
-                .allow("OPTIONS");
+            rb = Response.ok(t);
         } catch (Exception e) {
             x.setStatus(true);
-            rb = Response.ok(x)
-                    .header("Access-Control-Allow-Origin", "*")
-                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-                    .header("Access-Control-Allow-Headers", "Content-Type")
-                    .allow("OPTIONS");
+            rb = Response.ok(x);
         }
         
-        return rb.build();
+        return rb.header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .header("Access-Control-Allow-Headers", "Content-Type")
+                .allow("OPTIONS")
+                .build();
     }
 }

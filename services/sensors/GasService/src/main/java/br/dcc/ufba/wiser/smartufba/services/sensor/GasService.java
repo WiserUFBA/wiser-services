@@ -30,20 +30,16 @@ public class GasService {
 
             g.setRate(new Integer(rate));
 
-            rb = Response.ok(g)
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-                .header("Access-Control-Allow-Headers", "Content-Type")
-                .allow("OPTIONS");
+            rb = Response.ok(g);
         } catch (Exception e) {
             x.setStatus(true);
-            rb = Response.ok(x)
-                    .header("Access-Control-Allow-Origin", "*")
-                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-                    .header("Access-Control-Allow-Headers", "Content-Type")
-                    .allow("OPTIONS");
+            rb = Response.ok(x);
         }
         
-        return rb.build();
+        return rb.header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .header("Access-Control-Allow-Headers", "Content-Type")
+                .allow("OPTIONS")
+                .build();
     }
 }

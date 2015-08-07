@@ -18,18 +18,18 @@ public class PresenceService {
     @GET
     @Produces("application/json")
     public Response getPresence() {
-        System.out.println("----invoking getCustomer, Customer id is: " + "1");
+        ResponseBuilder rb;
         long idNumber = Long.parseLong("1");
         Presence c = new Presence();
         c.setId(idNumber);
         c.setStatus("true");
         
-        ResponseBuilder rb = Response.ok(c)
-            .header("Access-Control-Allow-Origin", "*")
-            .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-            .header("Access-Control-Allow-Headers", "Content-Type")
-            .allow("OPTIONS");
-        return rb.build();
+        rb = Response.ok(c);
+        return rb.header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .header("Access-Control-Allow-Headers", "Content-Type")
+                .allow("OPTIONS")
+                .build();
         
     }
 }
