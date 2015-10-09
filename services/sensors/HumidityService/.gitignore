@@ -14,3 +14,8 @@ hs_err_pid*
 /build/
 /dist/
 /target/
+
+# Eclipse Core
+.project
+.classpath
+.settings/
