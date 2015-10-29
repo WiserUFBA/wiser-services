@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created by Wiser Research Group UFBA -->
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:jaxrs="http://cxf.apache.org/jaxrs"
@@ -8,12 +9,15 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
 http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
 
-    <jaxrs:server id="SensorMove" address="/room">
+    <!-- Change the ID according to your service and select an address to this service -->
+    <jaxrs:server id="SensorMove" address="/cam1">
         <jaxrs:serviceBeans>
+            <!-- Change the ref according to the ID adding the suffix 'Svc' -->
             <ref bean="SensorMoveSvc"/>
         </jaxrs:serviceBeans>
     </jaxrs:server>
 
-    <bean id="SensorMoveSvc" class="br.dcc.ufba.wiser.smartufba.sensor.move.MoveService"/>
-
+    <!-- Change the ID according to the bean property changed above, you need to use the same value -->
+    <!-- You need to select the class of the service too -->
+    <bean id="SensorMoveSvc" class="br.dcc.ufba.wiser.smartufba.services.sensor.MoveService"/>
 </beans>

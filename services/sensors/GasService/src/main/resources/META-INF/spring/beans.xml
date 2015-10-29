@@ -8,11 +8,15 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
 http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
 
+    <!-- Change the ID according to your service and select an address to this service -->
     <jaxrs:server id="SensorGas" address="/gas">
         <jaxrs:serviceBeans>
+            <!-- Change the ref according to the ID adding the suffix 'Svc' -->
             <ref bean="SensorGasSvc"/>
         </jaxrs:serviceBeans>
     </jaxrs:server>
 
-    <bean id="SensorGasSvc" class="br.dcc.ufba.wiser.smartufba.sensor.gas.GasService"/>
+    <!-- Change the ID according to the bean property changed above, you need to use the same value -->
+    <!-- You need to select the class of the service too -->
+    <bean id="SensorGasSvc" class="br.dcc.ufba.wiser.smartufba.services.sensor.GasService"/>
 </beans>
