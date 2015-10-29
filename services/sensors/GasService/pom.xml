@@ -22,11 +22,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>br.dcc.ufba.wiser.smartufba</groupId>
-    <artifactId>HumidityService</artifactId>
+    <artifactId>GasService</artifactId>
     <packaging>bundle</packaging>
-    <name>HumidityService</name>
+    <name>GasService</name>
     <version>1.2</version>
-    <description>CXF service using JAX-RS for map humidity device</description>
+    <description>CXF service using JAX-RS for map gas device</description>
     
     <repositories>
 	    <repository>
@@ -57,7 +57,7 @@
         <dependency>
             <groupId>br.ufba.dcc.wiser</groupId>
             <artifactId>drivermqtt</artifactId>
-            <version>1.2</version>
+            <version>1.4</version>
         </dependency>
     </dependencies>
 
@@ -96,7 +96,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.4.0</version>
                 <configuration>
-                    <mainClass>br.dcc.ufba.wiser.smartufba.sensor.temperature.GasService</mainClass>
+                    <mainClass>br.dcc.ufba.wiser.smartufba.sensor.gas.GasService</mainClass>
                     <includePluginDependencies>false</includePluginDependencies>
                 </configuration>
             </plugin>

@@ -20,13 +20,51 @@ public class GasService {
 
     @GET
     @Produces("application/json")
-    public Response getGas() throws Exception {
+    @Path("window")
+    public Response getGasWindow() throws Exception {
+        Gas g = new Gas();
+        
+        DriverMQTT gas = new DriverMQTT("window", "device", "boteco@wiser");
+        int rate = gas.getValue("gas");
+        
+        g.setRate(rate);        
+        ResponseBuilder rb = Response.ok(g)
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+            .header("Access-Control-Allow-Headers", "Content-Type")
+            .allow("OPTIONS");
+        return rb.build();
+    }
+    
+    @GET
+    @Produces("application/json")
+    @Path("door")
+    public Response getGasDoor() throws Exception {
+        Gas g = new Gas();
+        
+        DriverMQTT gas = new DriverMQTT("temp-lamp", "device", "boteco@wiser");
+    	int rate = gas.getValue("gas");
+        
+        g.setRate(rate);
+        
+        ResponseBuilder rb = Response.ok(g)
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+            .header("Access-Control-Allow-Headers", "Content-Type")
+            .allow("OPTIONS");
+        return rb.build();
+    }
+    
+    @GET
+    @Produces("application/json")
+    @Path("back")
+    public Response getGasBack() throws Exception {
         Gas g = new Gas();
         
         DriverMQTT gas = new DriverMQTT("rele-pres", "device", "boteco@wiser");
-        String rate = gas.getValue("gas");
+        int rate = gas.getValue("gas");
         
-        g.setRate(new Integer(rate));
+        g.setRate(rate);
         
         ResponseBuilder rb = Response.ok(g)
             .header("Access-Control-Allow-Origin", "*")
