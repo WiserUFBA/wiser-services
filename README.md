@@ -1,6 +1,7 @@
 # SmartUFBA Web Services
 ---
 [![Build Status](https://travis-ci.org/WiserUFBA/wiser-services.svg?branch=master)](https://travis-ci.org/WiserUFBA/wiser-services)
+[![Codacy Badge](https://api.codacy.com/project/badge/grade/97a3f6c612a44585bd3ac0fc3c1b9ef0)](https://www.codacy.com/app/oi_je/wiser-services)
 
 ### Introdução
 
