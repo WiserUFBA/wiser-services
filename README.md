@@ -54,3 +54,9 @@ A prática correta a adição de novas dependências a um projeto é a de adicio
 OSGi permitindo que diferentes Serviços Web possam se utilizar de classes em comum.
 
 
+
+--
+<p align="center">
+	Developed by </br>
+  <img src="https://wiki.dcc.ufba.br/pub/SmartUFBA/ProjectLogo/wiserufbalogo.jpg"/>
+</p>
