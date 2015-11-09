@@ -5,6 +5,7 @@
 [![License Badge](https://img.shields.io/github/license/wiserufba/wiser-services.svg)](https://github.com/WiserUFBA/wiser-services/blob/master/LICENSE)
 [![Issues Badge](https://img.shields.io/github/issues/wiserufba/wiser-services.svg)](https://github.com/WiserUFBA/wiser-services/issues)
 [![Join the chat at https://gitter.im/WiserUFBA/wiser-services](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/WiserUFBA/wiser-services?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/WiserUFBA/wiser-services/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 ### Introdução
 
