@@ -20,36 +20,6 @@ public class LampService {
 
     @GET
     @Produces("application/json")
-    @Path("/planta")
-    public Response getStatusLamp(){
-        ResponseBuilder rb;
-        XmlErrorClass x = new XmlErrorClass();
-    	Lamp l = new Lamp();
-        
-        try{
-            DriverMQTT lamp = new DriverMQTT("planta", "device", "boteco@wiser");
-            String status = lamp.getInfo("lamp");
-
-            if(status.contentEquals("ON")) 
-                l.setStatus(true);
-            else
-                l.setStatus(false);
-
-            rb = Response.ok(l);
-        } catch (Exception e) {
-            x.setStatus(true);
-            rb = Response.ok(x);
-        }
-            
-        return  rb.header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-                .header("Access-Control-Allow-Headers", "Content-Type")
-                .allow("OPTIONS")
-                .build();
-    }
-    
-    @GET
-    @Produces("application/json")
     @Path("/rele-pres")
     public Response getStatusLamp2(){
         ResponseBuilder rb;
@@ -110,32 +80,6 @@ public class LampService {
     
     @POST
     @Produces("application/json")
-    @Path("/planta")
-    public Response setStatusLamp(@FormParam("status") boolean status) {
-    	ResponseBuilder rb;
-        XmlErrorClass x = new XmlErrorClass();
-        Lamp l = new Lamp();    	
-    	l.setStatus(status);
-    	
-        try{
-            DriverMQTT lamp = new DriverMQTT("planta", "device", "boteco@wiser");
-            lamp.setInfo("lamp", "" +(l.getStatus() ? 1 : 0));      
-
-            rb = Response.ok(l);
-        } catch (Exception e) {
-            x.setStatus(true);
-            rb = Response.ok(x);
-        }
-        
-        return  rb.header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-                .header("Access-Control-Allow-Headers", "Content-Type")
-                .allow("OPTIONS")
-                .build();
-    }
-    
-    @POST
-    @Produces("application/json")
     @Path("/rele-pres")
     public Response setStatusLamp2(@FormParam("status") boolean status) {
     	ResponseBuilder rb;
@@ -144,8 +88,8 @@ public class LampService {
     	l.setStatus(status);
     	
         try{
-            DriverMQTT lamp = new DriverMQTT("temp-lamp", "device", "boteco@wiser");
-            lamp.setInfo("rele-pres", "" +(l.getStatus() ? 1 : 0));      
+            DriverMQTT lamp = new DriverMQTT("rele-pres", "device", "boteco@wiser");
+            lamp.setInfo("lamp", (l.getStatus() ? "T" : "F"));      
 
             rb = Response.ok(l);
         } catch (Exception e) {
@@ -171,22 +115,18 @@ public class LampService {
     	
         try{
             DriverMQTT lamp = new DriverMQTT("temp-lamp", "device", "boteco@wiser");
-            lamp.setInfo("lamp", "" +(l.getStatus() ? 1 : 0));      
+            lamp.setInfo("lamp", l.getStatus() ? "T" : "F");      
 
-            rb = Response.ok(l)
-                    .header("Access-Control-Allow-Origin", "*")
-                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-                    .header("Access-Control-Allow-Headers", "Content-Type")
-                    .allow("OPTIONS");
+            rb = Response.ok(l);
         } catch (Exception e) {
             x.setStatus(true);
-            rb = Response.ok(x)
-                    .header("Access-Control-Allow-Origin", "*")
-                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-                    .header("Access-Control-Allow-Headers", "Content-Type")
-                    .allow("OPTIONS");
+            rb = Response.ok(x);
         }
         
-        return rb.build();
+        return rb.header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                    .header("Access-Control-Allow-Headers", "Content-Type")
+                    .allow("OPTIONS")
+                    .build();
     }
 }
