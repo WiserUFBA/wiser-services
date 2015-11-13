@@ -9,7 +9,7 @@
     <groupId>br.dcc.ufba.wiser.smartufba.services</groupId>
     <!-- Change the description according to your service -->
     <description>CXF service using JAX-RS for camera operation</description>
-    <version>1.6</version> <!-- Change your version every time you make editions on the code -->
+    <version>1.8</version> <!-- Change your version every time you make editions on the code -->
     <packaging>bundle</packaging>
     
     <!-- This is the repository of the release, you don't need to change this -->
@@ -41,11 +41,6 @@
             <artifactId>org.apache.servicemix.bundles.commons-httpclient</artifactId>
             <version>3.1_7</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>br.ufba.dcc.wiser</groupId>
-            <artifactId>drivermqtt-osgi</artifactId>
-            <version>1.8</version>
         </dependency>
     </dependencies>
 
