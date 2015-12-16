@@ -26,7 +26,7 @@ public class HumidityService {
         
         try{
             DriverMQTT humidity = new DriverMQTT("temp-lamp", "device", "boteco@wiser");
-            String percent = humidity.getInfo("ar");
+            String percent = humidity.getInfo("humid");
 
             h.setPercent(percent);
 
