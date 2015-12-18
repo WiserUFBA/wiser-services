@@ -1,6 +1,10 @@
 package br.dcc.ufba.wiser.smartufba.services.sensor;
 
-public class Moviment {
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "Movement")
+
+public class Movement {
 	private int number;
 
 
