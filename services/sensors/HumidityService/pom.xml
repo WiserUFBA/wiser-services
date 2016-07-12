@@ -45,7 +45,7 @@
         <dependency>
             <groupId>br.ufba.dcc.wiser</groupId>
             <artifactId>drivermqtt-osgi</artifactId>
-            <version>2.1.4</version>
+            <version>3.1.1</version>
         </dependency>
     </dependencies>
 

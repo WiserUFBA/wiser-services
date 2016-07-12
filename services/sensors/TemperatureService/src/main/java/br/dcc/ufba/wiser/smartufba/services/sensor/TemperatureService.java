@@ -3,15 +3,19 @@
  */
 package br.dcc.ufba.wiser.smartufba.services.sensor;
 
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
+
 import br.ufba.dcc.wiser.smartufba.tatu.drivers.DriverMQTT;
 
 @Path("/devices/sensor/temperature")
+
 public class TemperatureService {
+	
 
     public TemperatureService() {
     }
@@ -25,9 +29,9 @@ public class TemperatureService {
         t.setUnit("Celsius");
         
         try{
-            DriverMQTT temp = new DriverMQTT("temp-lamp", "device", "boteco@wiser");
-            String degree = temp.getInfo("temp");
-
+            DriverMQTT temp = new DriverMQTT("humidTemp", "", "");
+            String degree = temp.getInfo("temperature");
+        	
             t.setDegree(new Integer(degree));
 
             rb = Response.ok(t);
@@ -42,4 +46,5 @@ public class TemperatureService {
                 .allow("OPTIONS")
                 .build();
     }
+    
 }

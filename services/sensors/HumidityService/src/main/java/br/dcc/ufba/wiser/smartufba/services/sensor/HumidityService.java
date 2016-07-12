@@ -13,6 +13,7 @@ import br.ufba.dcc.wiser.smartufba.tatu.drivers.DriverMQTT;
 
 @Path("/devices/sensor/humidity")
 public class HumidityService {
+	
 
     public HumidityService() {
     }
@@ -25,8 +26,8 @@ public class HumidityService {
         Humidity h = new Humidity();
         
         try{
-            DriverMQTT humidity = new DriverMQTT("temp-lamp", "device", "boteco@wiser");
-            String percent = humidity.getInfo("humid");
+            DriverMQTT humidity = new DriverMQTT("ufbaino01", "", "");
+            String percent = humidity.getInfo("humiditySensor");
 
             h.setPercent(percent);
 
