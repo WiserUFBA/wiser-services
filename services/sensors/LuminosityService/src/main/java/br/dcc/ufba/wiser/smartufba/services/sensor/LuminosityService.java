@@ -12,12 +12,12 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 
 import br.ufba.dcc.wiser.smartufba.tatu.drivers.DriverMQTT;
 
-@Path("/devices/sensor/temperature")
+@Path("/")
 
-public class TemperatureService {
+public class LuminosityService {
 	
 
-    public TemperatureService() {
+    public LuminosityService() {
     }
 
     @GET
@@ -25,16 +25,14 @@ public class TemperatureService {
     public Response getTemperature() throws Exception {
         ResponseBuilder rb;
         XmlErrorClass x = new XmlErrorClass();
-        Temperature t = new Temperature();
-        t.setUnit("Celsius");
-        
+        Luminosity l = new Luminosity();      
         try{
-            DriverMQTT temp = new DriverMQTT("ufbaino01", "wiser", "wiser2014");
-            String degree = temp.getInfo("temperatureSensor");
+            DriverMQTT driver = new DriverMQTT("ufbaino01", "wiser", "wiser2014");
+            String percent = driver.getInfo("luminositySensor");
         	
-            t.setDegree(new Integer(degree));
+            l.setPercent(new Integer(percent));
 
-            rb = Response.ok(t);
+            rb = Response.ok(l);
         } catch (Exception e) {
             x.setStatus(true);
             rb = Response.ok(x);

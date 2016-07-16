@@ -25,8 +25,8 @@ public class GasService {
         Gas g = new Gas();
         
         try{
-            DriverMQTT gas = new DriverMQTT("rele-pres", "device", "boteco@wiser");
-            String rate = "" + gas.getValue("gas");
+            DriverMQTT gas = new DriverMQTT("ufbaino01", "wiser", "wiser2014");
+            String rate = "" + gas.getValue("gasSensor");
 
             g.setRate(new Integer(rate));
 

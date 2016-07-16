@@ -10,7 +10,7 @@ http://www.springframework.org/schema/osgi http://www.springframework.org/schema
 
 	<!-- Change the ID according to your service and select an address to this 
 		service -->
-	<jaxrs:server id="SensorTemperature" address="/temp">
+	<jaxrs:server id="SensorTemperature" address="/ufbaino01/temperature">
 		<jaxrs:serviceBeans>
 			<!-- Change the ref according to the ID adding the suffix 'Svc' -->
 			<ref bean="SensorTemperatureSvc" />

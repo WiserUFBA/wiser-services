@@ -3,7 +3,6 @@
  */
 package br.dcc.ufba.wiser.smartufba.services.sensor;
 
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -12,29 +11,25 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 
 import br.ufba.dcc.wiser.smartufba.tatu.drivers.DriverMQTT;
 
-@Path("/devices/sensor/temperature")
+@Path("/")
+public class MotionService {
 
-public class TemperatureService {
-	
-
-    public TemperatureService() {
+    public MotionService() {
     }
 
     @GET
     @Produces("application/json")
-    public Response getTemperature() throws Exception {
+    public Response getTimeOfLastMotion() {
         ResponseBuilder rb;
         XmlErrorClass x = new XmlErrorClass();
-        Temperature t = new Temperature();
-        t.setUnit("Celsius");
-        
-        try{
-            DriverMQTT temp = new DriverMQTT("ufbaino01", "wiser", "wiser2014");
-            String degree = temp.getInfo("temperatureSensor");
-        	
-            t.setDegree(new Integer(degree));
+        Motion m = new Motion();
 
-            rb = Response.ok(t);
+        try{
+            DriverMQTT movement = new DriverMQTT("ufbaino01", "wiser", "wiser2014");
+            int move = movement.getValue("motionSensor");
+            m.setTimeofLastMotion(move);
+
+            rb = Response.ok(m);
         } catch (Exception e) {
             x.setStatus(true);
             rb = Response.ok(x);
@@ -46,5 +41,4 @@ public class TemperatureService {
                 .allow("OPTIONS")
                 .build();
     }
-    
 }

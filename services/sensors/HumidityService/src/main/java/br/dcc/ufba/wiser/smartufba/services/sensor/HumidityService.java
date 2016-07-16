@@ -26,7 +26,7 @@ public class HumidityService {
         Humidity h = new Humidity();
         
         try{
-            DriverMQTT humidity = new DriverMQTT("ufbaino01", "", "");
+            DriverMQTT humidity = new DriverMQTT("ufbaino01", "wiser", "wiser2014");
             String percent = humidity.getInfo("humiditySensor");
 
             h.setPercent(percent);
