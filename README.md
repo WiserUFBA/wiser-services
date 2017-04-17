@@ -1,5 +1,7 @@
 # SmartUFBA Web Services
 ---
+
+[![Join the chat at https://gitter.im/WiserUFBA/wiser-services](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/WiserUFBA/wiser-services?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://travis-ci.org/WiserUFBA/wiser-services.svg?branch=master)](https://travis-ci.org/WiserUFBA/wiser-services)
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/97a3f6c612a44585bd3ac0fc3c1b9ef0)](https://www.codacy.com/app/oi_je/wiser-services)
 [![License Badge](https://img.shields.io/github/license/wiserufba/wiser-services.svg)](https://github.com/WiserUFBA/wiser-services/blob/master/LICENSE)
