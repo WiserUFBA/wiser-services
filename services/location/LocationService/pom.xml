@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created by Wiser Research Group UFBA -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- Edit only the marked tags -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>LocationService</name> <!-- Change the name of Service -->
+    <artifactId> LocationService </artifactId> <!-- Change the artifact this is the name used in maven -->
+    <groupId>br.dcc.ufba.wiser.smartufba</groupId>
+    <!-- Change the description according to your service -->
+    <description>CXF service using JAX-RS for map gateway location</description>
+    <version>2.5.0-RELEASE</version> <!-- Change your version every time you make editions on the code -->
+    <packaging>bundle</packaging>
+
+    <!-- This is the repository of the release, you don't need to change this -->
+    <repositories>
+        <repository>
+            <id>wiser-releases</id>
+            <url>https://github.com/WiserUFBA/wiser-mvn-repo/raw/master/releases</url>
+        </repository>
+    </repositories>
+
+    <!-- This is the dependencies used to common projects, add new dependencies 
+    if you need -->
+    <!-- If you add new dependencies don't forget to add this to the Import-Package 
+    Tag -->
+    <!-- And add in your karaf this dependencies too -->
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.servicemix.specs</groupId>
+            <artifactId>org.apache.servicemix.specs.jsr339-api-2.0</artifactId>
+            <version>2.4.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.servicemix.specs</groupId>
+            <artifactId>org.apache.servicemix.specs.jaxb-api-2.1</artifactId>
+            <version>2.5.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.servicemix.bundles</groupId>
+            <artifactId>org.apache.servicemix.bundles.commons-httpclient</artifactId>
+            <version>3.1_7</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>br.ufba.dcc.wiser</groupId>
+            <artifactId>drivermqtt-osgi</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-bundle-jaxrs</artifactId>
+            <version>2.7.11</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.196</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>4.3.1</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
+
+    <!-- Build specifications -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.6</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <version>2.5.4</version>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Description>${project.description}</Bundle-Description>
+                        <!-- If you have add new dependencies add the packages here -->
+                        <Import-Package>
+                            javax.wsdl,
+                            javax.xml.bind,
+                            javax.xml.bind.annotation,
+                            javax.ws.rs,
+                            javax.ws.rs.core,
+                            org.springframework.beans.factory.config,
+                            br.ufba.dcc.wiser.smartufba.tatu.drivers,
+                            *
+                        </Import-Package>
+                        <!-- Change the export package according to your service class exported -->
+                        <Export-Package>
+                            br.dcc.ufba.wiser.smartufba.services.local.LocationService
+                        </Export-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <configuration>
+                    <!-- Change the main class according to the class of your service created -->
+                    <mainClass>br.dcc.ufba.wiser.smartufba.services.local.LocationService</mainClass>
+                    <includePluginDependencies>false</includePluginDependencies>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
