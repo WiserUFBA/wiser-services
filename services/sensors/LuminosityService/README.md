@@ -1,2 +1,2 @@
-# Serviço de temperatura
+# Serviço Luminosidade
 
