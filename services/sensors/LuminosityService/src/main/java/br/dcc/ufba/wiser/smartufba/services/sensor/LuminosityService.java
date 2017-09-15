@@ -22,7 +22,7 @@ public class LuminosityService {
 
     @GET
     @Produces("application/json")
-    public Response getTemperature() throws Exception {
+    public Response getLuminosity() throws Exception {
         ResponseBuilder rb;
         XmlErrorClass x = new XmlErrorClass();
         Luminosity l = new Luminosity();      
